@@ -15,9 +15,8 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
-    name: "PostForm",
+    name: "UpdatePostForm",
     data() {
         return {
             title: "",
@@ -29,7 +28,7 @@ export default {
     methods: {
         async updatePost() {
             await axios({
-                method: "post",
+                method: "put",
                 url: "http://127.0.0.1:8000/api/addPost",
 
                 data: {
