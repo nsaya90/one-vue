@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     name: "UpdatePostForm",
     data() {
@@ -29,7 +30,7 @@ export default {
         async updatePost() {
             await axios({
                 method: "put",
-                url: "http://127.0.0.1:8000/api/addPost",
+                url: "http://127.0.0.1:8000/api/addPost/" + 20,
 
                 data: {
                     title: this.title,
@@ -43,6 +44,9 @@ export default {
                 this.message = "Post modifié !";
 
                 // mettre un redirection vers la page des post
+                setTimeout(() => {
+                    this.$router.go();
+                }, 2000);
             }
         },
     },
