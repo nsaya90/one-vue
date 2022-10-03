@@ -74,7 +74,7 @@
                 <div
                   class="w-full h-auto overflow-hidden rounded-md sm:rounded-xl">
                   <transition appear name="logo">
-                    <img src="@/assets/logo2.png" />
+                    <img class="logo1" src="@/assets/logo2.png" />
                   </transition>
                 </div>
               </div>
@@ -166,5 +166,17 @@ export default {
 
 .logo-leave-to {
   opacity: 0;
+}
+
+.logo1 {
+  transform: translateY(-100%);
+  animation: logoanim 3s ease-in forwards;
+  filter: brightness(110%);
+}
+
+@keyframes logoanim {
+  100% {
+    transform: translateY(-1%);
+  }
 }
 </style>
