@@ -4,7 +4,13 @@
     <router-link to="/login">Connexion</router-link> |
     <router-link to="/register">S'inscrire</router-link>
   </nav> -->
-  <router-view />
+  <router-view v-slot="{ Component, route }">
+    <transition
+      :enter-active-class="route.meta.enterClass"
+      :leave-active-class="route.meta.leaveClass">
+      <component :is="Component"></component>
+    </transition>
+  </router-view>
 </template>
 
 <style>
@@ -21,5 +27,14 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.route-enter-from,
+.route-leave-to {
+  opacity: 0;
+}
+.route-enter-active,
+.route-leave-active {
+  transition: opacity 1s ease-out;
 }
 </style>

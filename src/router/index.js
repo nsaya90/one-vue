@@ -10,26 +10,46 @@ const routes = [
     path: "/",
     name: "welcome",
     component: WelcomeView,
+    meta: {
+      enterClass: "animate__animated animate__fadeInLeft",
+      leaveClass: "animate__animated animate__fadeOut",
+    },
   },
   {
     path: "/login",
     name: "login",
     component: LoginView,
+    meta: {
+      enterClass: "animate__animated animate__fadeInLeft",
+      leaveClass: "animate__animated animate__fadeOut",
+    },
   },
   {
     path: "/register",
     name: "register",
     component: RegisterView,
+    meta: {
+      enterClass: "animate__animated animate__fadeInLeft",
+      leaveClass: "animate__animated animate__fadeOut",
+    },
   },
   {
     path: "/profil",
     name: "profil",
     component: ProfilView,
+    meta: {
+      enterClass: "animate__animated animate__fadeInLeft",
+      leaveClass: "animate__animated animate__fadeOut",
+    },
   },
   {
     path: "/edit",
     name: "edit",
     component: EditView,
+    meta: {
+      enterClass: "animate__animated animate__fadeInLeft",
+      leaveClass: "animate__animated animate__fadeOut",
+    },
   },
 ];
 

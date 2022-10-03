@@ -66,15 +66,6 @@
           </div>
 
           <div class="mt-5">
-            <input
-              id="password"
-              v-model="password"
-              type="password"
-              class="block w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-400 focus:border-transparent"
-              placeholder="Mot de passe" />
-          </div>
-
-          <div class="mt-5">
             <button
               @click="update"
               class="py-3 bg-green-400 text-white w-full rounded hover:bg-white hover:text-green-400">

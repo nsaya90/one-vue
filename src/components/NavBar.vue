@@ -84,7 +84,7 @@
           <div class="absolute z-30 right-0 mt-2" :class="{ hidden: !isOpen2 }">
             <div class="bg-white rounded-lg shadow-lg py-2 w-48">
               <a
-                href="#"
+                href="/profil"
                 class="block text-green-400 font-semibold px-4 py-2 | hover:text-white hover:bg-green-400">
                 <svg
                   class="inline-block"
@@ -107,7 +107,7 @@
                 Profil</a
               >
               <a
-                href="#"
+                href="edit"
                 class="block text-green-400 font-semibold px-4 py-2 | hover:text-white hover:bg-green-400">
                 <svg
                   class="inline-block"
@@ -202,8 +202,8 @@ export default {
   methods: {
     logout() {
       localStorage.clear();
-      // localStorage.removeItem(data.access_token);
-      this.$router.push({ name: "welcome" });
+      const newLoc = "http://localhost:8080/";
+      window.location.href = newLoc;
     },
   },
 
