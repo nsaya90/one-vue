@@ -4,6 +4,8 @@ import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import ProfilView from "../views/ProfilView.vue";
 import EditView from "../views/EditView.vue";
+import PostView from "../views/PostView.vue";
+import UpdatePostView from "../views/UpdatePostView.vue";
 
 const routes = [
   {
@@ -50,6 +52,16 @@ const routes = [
       enterClass: "animate__animated animate__fadeInLeft",
       leaveClass: "animate__animated animate__fadeOut",
     },
+  },
+  {
+    path: "/addpost",
+    name: "addPost",
+    component: PostView,
+  },
+  {
+    path: "/update-post",
+    name: "updatePost",
+    component: UpdatePostView,
   },
 ];
 

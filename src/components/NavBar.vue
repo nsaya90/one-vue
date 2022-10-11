@@ -181,10 +181,10 @@ export default {
       email: "",
       age: "",
       phone: "",
+      info: "",
       show: false,
       isOpen1: true,
       isOpen2: false,
-      info: "",
     };
   },
 

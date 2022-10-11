@@ -62,7 +62,7 @@
                   fill="white"
                   d="M17 10a4 4 0 0 1 4 4v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5a4 4 0 0 1 4-4V7h2v3h2V7h2v3h2V7h2v3ZM7 12a2 2 0 0 0-2 2v1h14v-1a2 2 0 0 0-2-2H7Zm-2 5v2h14v-2H5ZM7 4a1 1 0 0 0 1-1a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4Zm4 0a1 1 0 0 0 1-1a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0V4Zm4 0a1 1 0 0 0 1-1a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0V4Z" />
               </svg>
-              {{ age }}
+              {{ age }} ans
             </div>
             <div class="py-2 w-full text-center text-base text-white">
               <svg
@@ -193,123 +193,92 @@
       </div>
 
       <!-- End Navbar -->
-
       <div
         class="w-full md:w-3/4 lg:w-4/5 p-5 md:px-12 lg:24 h-full overflow-x-scroll antialiased">
         <div class="bg-green-400 w-full shadow rounded-lg p-5">
-          <textarea
-            class="bg-gray-200 w-full rounded-lg shadow border p-2"
-            rows="5"
-            placeholder="Ecrivez votre post"></textarea>
+          <form method="POST" enctype="multipart/form-data" @submit.prevent>
+            <input
+              class="w-full rounded-lg py-3 px-4 bg-gray-200 mb-2 mr-2"
+              placeholder="Titre du post"
+              accept="image/png, image/jpeg"
+              type="text"
+              name="title"
+              id="title"
+              v-model="title" />
+            <input
+              class="w-full rounded-lg py-2 px-3 bg-gray-200 mb-2"
+              type="file"
+              name="image"
+              id="image"
+              ref="file"
+              multiple
+              @change="addImage" />
 
-          <div class="w-full flex flex-row flex-wrap mt-3">
-            <div class="w-1/3">
-              <select
-                class="w-full p-2 rounded-lg bg-gray-200 shadow border float-left">
-                <option>Public</option>
-                <option>Privée</option>
-              </select>
+            <textarea
+              class="bg-gray-200 w-full rounded-lg shadow border p-2"
+              rows="5"
+              placeholder="Ecrivez votre post"
+              v-model="text"></textarea>
+
+            <div class="w-full flex flex-row flex-wrap mt-3">
+              <div class="w-1/3">
+                <select
+                  class="w-full p-2 rounded-lg bg-gray-200 shadow border float-left">
+                  <option>Public</option>
+                  <option>Privée</option>
+                </select>
+              </div>
+              <div class="w-2/3">
+                <button
+                  type="button"
+                  class="float-right bg-white hover:bg-gray-200 text-green-400 font-bold p-2 rounded-lg"
+                  @click="addPost">
+                  Soumettre
+                </button>
+              </div>
             </div>
-            <div class="w-2/3">
-              <button
-                type="button"
-                class="float-right bg-white hover:bg-gray-200 text-green-400 font-bold p-2 rounded-lg">
-                Soumettre
-              </button>
-            </div>
-          </div>
+          </form>
+          <h2>{{ message }}</h2>
         </div>
-
-        <div class="mt-3 flex flex-col">
-          <div class="bg-white mt-3 border-2 border-green-400 rounded-lg">
-            <img
-              class="border rounded-t-lg shadow-lg"
-              src="https://images.unsplash.com/photo-1572817519612-d8fadd929b00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
-            <div
-              class="bg-white border shadow p-5 text-xl text-gray-700 font-semibold">
-              A Pretty Cool photo from the mountains. Image credit to
-              @danielmirlea on Unsplash.
-            </div>
-            <div class="bg-white p-1 border shadow flex flex-row flex-wrap">
-              <div
-                class="w-1/3 hover:bg-gray-200 text-center text-xl text-gray-700 font-semibold">
-                Like
-              </div>
-              <div
-                class="w-1/3 hover:bg-gray-200 border-l-4 border-r- text-center text-xl text-gray-700 font-semibold">
-                Share
-              </div>
-              <div
-                class="w-1/3 hover:bg-gray-200 border-l-4 text-center text-xl text-gray-700 font-semibold">
-                Comment
-              </div>
-            </div>
-
-            <div
-              class="bg-white border-4 bg-gray-300 border-white rounded-b-lg shadow p-5 text-xl text-gray-700 content-center font-semibold flex flex-row flex-wrap">
-              <div class="w-full">
-                <div class="w-full text-left text-xl text-gray-600">
-                  @Some Person
+        <ul>
+          <div class="mt-3 flex flex-col">
+            <li v-for="info2 in list" :key="info2.id">
+              <div class="bg-white mt-3 border-2 border-green-400 rounded-lg">
+                <div class="titre">{{ info2.title }}</div>
+                <div class="border rounded-t-lg shadow-lg">
+                  <img src="file.name" alt="" />
                 </div>
-                A Pretty Cool photo from the mountains. Image credit to
-                @danielmirlea on Unsplash. A Pretty Cool photo from the
-                mountains. Image credit to @danielmirlea on Unsplash.
-              </div>
-            </div>
-          </div>
+                <div
+                  class="bg-white border shadow p-5 text-xl text-gray-700 font-semibold">
+                  {{ info2.text }}
+                </div>
+                <div class="bg-white p-1 border shadow flex flex-row flex-wrap">
+                  <div
+                    class="w-1/3 hover:bg-gray-200 text-center text-xl text-gray-700 font-semibold">
+                    Like
+                  </div>
+                  <div
+                    class="w-1/3 hover:bg-gray-200 border-l-4 border-r- text-center text-xl text-gray-700 font-semibold">
+                    Share
+                  </div>
+                  <div
+                    class="w-1/3 hover:bg-gray-200 border-l-4 text-center text-xl text-gray-700 font-semibold">
+                    Comment
+                  </div>
+                </div>
 
-          <div class="bg-white mt-3">
-            <img
-              class="border rounded-t-lg shadow-lg"
-              src="https://images.unsplash.com/photo-1572817519612-d8fadd929b00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
-            <div
-              class="bg-white border shadow p-5 text-xl text-gray-700 font-semibold">
-              A Pretty Cool photo from the mountains. Image credit to
-              @danielmirlea on Unsplash.
-            </div>
-            <div
-              class="bg-white p-1 rounded-b-lg border shadow flex flex-row flex-wrap">
-              <div
-                class="w-1/3 hover:bg-gray-200 text-center text-xl text-gray-700 font-semibold">
-                Like
+                <div
+                  class="bg-white border-4 bg-gray-300 border-white rounded-b-lg shadow p-5 text-xl text-gray-700 content-center font-semibold flex flex-row flex-wrap">
+                  <div class="w-full">
+                    <div class="w-full text-left text-xl text-gray-600">
+                      @{{ lastname }}{{ firstname }}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div
-                class="w-1/3 hover:bg-gray-200 border-l-4 border-r- text-center text-xl text-gray-700 font-semibold">
-                Share
-              </div>
-              <div
-                class="w-1/3 hover:bg-gray-200 border-l-4 text-center text-xl text-gray-700 font-semibold">
-                Comment
-              </div>
-            </div>
+            </li>
           </div>
-
-          <div class="bg-white mt-3">
-            <img
-              class="border rounded-t-lg shadow-lg"
-              src="https://images.unsplash.com/photo-1572817519612-d8fadd929b00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
-            <div
-              class="bg-white border shadow p-5 text-xl text-gray-700 font-semibold">
-              A Pretty Cool photo from the mountains. Image credit to
-              @danielmirlea on Unsplash.
-            </div>
-            <div
-              class="bg-white p-1 rounded-b-lg border shadow flex flex-row flex-wrap">
-              <div
-                class="w-1/3 hover:bg-gray-200 text-center text-xl text-gray-700 font-semibold">
-                Like
-              </div>
-              <div
-                class="w-1/3 hover:bg-gray-200 border-l-4 border-r- text-center text-xl text-gray-700 font-semibold">
-                Share
-              </div>
-              <div
-                class="w-1/3 hover:bg-gray-200 border-l-4 text-center text-xl text-gray-700 font-semibold">
-                Comment
-              </div>
-            </div>
-          </div>
-        </div>
+        </ul>
       </div>
     </div>
     <Footer />
@@ -328,6 +297,7 @@ export default {
 
   data() {
     return {
+      list: "",
       token: token,
       lastname: "",
       firstname: "",
@@ -337,7 +307,13 @@ export default {
       show: false,
       isOpen1: true,
       isOpen2: false,
+      id_user: "",
+      title: "",
+      text: "",
       info: "",
+      info2: null,
+      image: "",
+      message: "",
     };
   },
 
@@ -347,6 +323,7 @@ export default {
       url: "http://127.0.0.1:8000/api/user",
       headers: { Authorization: "Bearer " + token },
     }).then((response) => (this.info = response.data.user));
+
     this.lastname = this.info["lastname"];
     this.firstname = this.info["firstname"];
     this.age = this.info["age"];
@@ -354,13 +331,61 @@ export default {
     this.email = this.info["email"];
   },
 
+  async mounted() {
+    await axios({
+      method: "get",
+      url: "http://127.0.0.1:8000/api/addPost",
+      headers: { Authorization: "Bearer " + token },
+    }).then((response) => (this.info2 = response.data.addPost));
+    console.log(this.info2);
+
+    this.title = this.info2["title"];
+    this.text = this.info["firstname"];
+    this.like = this.info["like"];
+    this.id_user = this.info["id_user"];
+    this.image = this.info["image"];
+  },
+
   methods: {
+    async addPost() {
+      await axios({
+        method: "post",
+        url: "http://127.0.0.1:8000/api/addPost",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "multipart/form-data",
+        },
+        data: {
+          title: this.title,
+          text: this.text,
+          like: 0,
+
+          id_user: this.id_user,
+          image: this.image,
+        },
+      }).then((response) => (this.info2 = response));
+      console.log(this.info2);
+
+      if (this.info2) {
+        this.message = "Post publié !";
+        setTimeout(() => {
+          this.$router.push("/profil");
+        }, 2000);
+        window.location.reload();
+      }
+      this.list = data.addPost;
+      console.log(data);
+    },
+
     logout() {
       localStorage.clear();
       const newLoc = "http://localhost:8080/";
       window.location.href = newLoc;
       // localStorage.removeItem(data.access_token);
       // this.$router.push({ name: "welcome" });
+    },
+    addImage(event) {
+      this.image = this.$refs.file.files[0];
     },
   },
 };
